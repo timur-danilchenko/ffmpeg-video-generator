@@ -86,6 +86,7 @@ class VideoGenerator:
         text = random.choice(self.texts)
 
         # Отрисовка текста
+        # Если нужно поменять положение текста на странице, то надо поменять значения x, y
         return ffmpeg.drawtext(video, x=self.width/8, y=self.height/2, fontsize=60, fontcolor="white", textfile=text, fontfile=font)
 
     def output_video(self, video_stream):
