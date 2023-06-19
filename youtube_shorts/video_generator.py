@@ -94,7 +94,7 @@ class VideoGenerator:
         # Наложение на видео
 
         # Выгрузка видео
-        ffmpeg.output(video_stream, audio_stream, str(RESULTS / f"{time.time():.0f}.mkv"), **{"qscale:v": "3"}, shortest=None).run()
+        ffmpeg.output(video_stream, audio_stream, str(RESULTS / f"{time.time():.0f}.mp4"), **{"qscale:v": "3", "vsync": "2"}, shortest=None, format='mp4').run()
 
     def __iter__(self):
         return self
