@@ -1,2 +1,0 @@
-class CannotSignInError(Exception):
-    pass

@@ -2,12 +2,12 @@ import sys
 from pathlib import Path
 
 import undetected_chromedriver as uc
-from .settings import RESULTS, VIDEOS, AUDIOS, FONTS, TEXTS
+from ..settings import RESULTS, VIDEOS, AUDIOS, FONTS, TEXTS
 
 from PyQt5 import QtWidgets
 import threading
 
-from .main_window_design import Ui_MainWindow
+from .design.main_window_ui import Ui_MainWindow
 
 BASE_DIR = Path(".").resolve()
 
@@ -42,14 +42,13 @@ class Application(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.listWidget.clear()
 
-        accounts_count = self.get_account_count()
+        # accounts_count = self.get_account_count()
         self.listWidget.addItem(f"Количество исходных видео: {count_videos:03d}")
         self.listWidget.addItem(f"Количество аудио дорожек: {count_audios:03d}")
         self.listWidget.addItem(f"Количество шрифтов: {count_fonts:03d}")
         self.listWidget.addItem(f"Количество текстов: {count_texts:03d}")
         self.listWidget.addItem(f"Количество сгенерированных видео: {count_results:03d}")
-        self.listWidget.addItem(f"Количество добавленных аккаунтов: {accounts_count:03d}")
-
+        # self.listWidget.addItem(f"Количество добавленных аккаунтов: {accounts_count:03d}")
 
 def run(video_generator):
     app = QtWidgets.QApplication(sys.argv)

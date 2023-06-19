@@ -1,7 +1,7 @@
 from pathlib import Path
 
 
-BASE_DIR = Path(".").resolve()
+BASE_DIR = Path(".").resolve() / "youtube_shorts"
 
 ASSETS = BASE_DIR / "assets"
 

@@ -6,13 +6,13 @@ from typing import List
 from glob import glob
 import ffmpeg
 
-from .settings import VIDEOS, AUDIOS, RESULTS, TEXTS, FONTS
+from ..settings import VIDEOS, AUDIOS, RESULTS, TEXTS, FONTS
 
 from itertools import permutations
 
 
 class VideoGenerator:
-    def __init__(self, width=1080, height=1920, max_pieces_video_in_one_video: int = 3, min_delay: float = 1, max_delay: float = 5) -> None:
+    def __init__(self, width=1080, height=1920, max_pieces_video_in_one_video: int = 1, min_delay: float = 1, max_delay: float = 5) -> None:
         # Подгрузка видео идет из папок находиящихся в проекта, в качестве материала
         # Необходимо сохранять видео для монтирования перед запуском
         video_list, audio_list = (list(VIDEOS.glob("**/*.mp4")),
