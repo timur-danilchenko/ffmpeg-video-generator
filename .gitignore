@@ -1,4 +1,6 @@
-
 sessions/
-youtube_shorts/__pycache__
-youtube_shorts/pycs
+__pycache__
+venv
+.idea
+run.spec
+*.exe

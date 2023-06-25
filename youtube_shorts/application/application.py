@@ -1,54 +1,73 @@
 import sys
 from pathlib import Path
 
-import undetected_chromedriver as uc
-from ..settings import RESULTS, VIDEOS, AUDIOS, FONTS, TEXTS
+from ..settings import settings
 
 from PyQt5 import QtWidgets
 import threading
 
+from glob import glob
 from .design.main_window_ui import Ui_MainWindow
-
-BASE_DIR = Path(".").resolve()
 
 class Application(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, video_generator):
         super(Application, self).__init__()
         self.setupUi(self)
         self.update_info()
-        self.genVideo.clicked.connect(self.generate_videos)
+        self.videoGenerationButton.clicked.connect(self.generate_videos)
+        self.videoPathButton.clicked.connect(self.video_path)
+        self.audioPathButton.clicked.connect(self.audio_path)
+        self.textPathButton.clicked.connect(self.text_path)
+        self.fontsPathButton.clicked.connect(self.fonts_path)
         self.video_generator = video_generator
 
     def generate_videos(self):
-        width = self.widthVideo.value()
-        height = self.heightVideo.value()
+        settings.path_results(QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку для полученных результатов'))
 
-        max_pieces_video_in_one_video = self.fragmentInVideo.value()
-        min_delay = self.videoDelayMin.value()
-        max_delay = self.videoDelayMax.value()
-        video_count = self.videoCount.value()
+        width = self.widthSpinBox.value()
+        height = self.heightSpinBox.value()
 
-        threading.Thread(target=self.video_generator.run,
-                         args=(width, height, max_pieces_video_in_one_video,
-                               min_delay, max_delay, video_count, self.update_info)).start()
+        max_pieces_video_in_one_video = self.fragmentInSpinBox.value()
+        min_delay = self.videoDelayMinSpinBox.value()
+        max_delay = self.videoDelayMaxSpinBox.value()
+        video_count = self.videoCountSpinBox.value()
 
-    
+        self.video_generator.run(width, height, max_pieces_video_in_one_video, min_delay, max_delay, video_count)
+        # threading.Thread(target=self.video_generator.run,
+        #                  args=(width, height, max_pieces_video_in_one_video,
+        #                        min_delay, max_delay, video_count)).start()
+
     def update_info(self):
-        count_videos = len(list(VIDEOS.glob("**/*.mp4")))
-        count_audios = len(list(AUDIOS.glob("**/*.mp3")))
-        count_results = len(list(RESULTS.glob("**/*.mp4")))
-        count_fonts = len(list(FONTS.glob("**/*.ttf")))
-        count_texts = len(list(TEXTS.glob("**/*.txt")))
+        count_videos = len(list(settings.VIDEOS.glob("**/*.mp4")))
+        count_audios = len(list(settings.AUDIOS.glob("**/*.mp3")))
+        count_texts = len(list(settings.TEXTS.glob("**/*.txt")))
+        count_fonts = len(list(settings.FONTS.glob("**/*.ttf")))
 
-        self.listWidget.clear()
+        self.assetsSettings.clear()
 
-        # accounts_count = self.get_account_count()
-        self.listWidget.addItem(f"Количество исходных видео: {count_videos:03d}")
-        self.listWidget.addItem(f"Количество аудио дорожек: {count_audios:03d}")
-        self.listWidget.addItem(f"Количество шрифтов: {count_fonts:03d}")
-        self.listWidget.addItem(f"Количество текстов: {count_texts:03d}")
-        self.listWidget.addItem(f"Количество сгенерированных видео: {count_results:03d}")
-        # self.listWidget.addItem(f"Количество добавленных аккаунтов: {accounts_count:03d}")
+        self.assetsSettings.setText(f"Количество исходных видео: {count_videos:03d}\n"
+            f"Количество аудио дорожек: {count_audios:03d}\n" 
+            f"Количество текстов: {count_texts:03d}\n" 
+            f"Количество шрифтов: {count_fonts:03d}\n")
+
+        # self.assetsSettings.addItem(f"Количество сгенерированных видео: {count_results:03d}")
+        # self.assetsSettings.addItem(f"Количество добавленных аккаунтов: {accounts_count:03d}")
+
+    def video_path(self):
+        settings.path_videos(QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку с исходными видео'))
+        self.update_info()
+
+    def audio_path(self):
+        settings.path_audios(QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку с аудиозаписями'))
+        self.update_info()
+
+    def text_path(self):
+        settings.path_texts(QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку с текстами'))
+        self.update_info()
+
+    def fonts_path(self):
+        settings.path_fonts(QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку с шрифтами'))
+        self.update_info()
 
 def run(video_generator):
     app = QtWidgets.QApplication(sys.argv)

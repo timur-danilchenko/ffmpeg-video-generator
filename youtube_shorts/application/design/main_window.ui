@@ -14,38 +14,6 @@
    <string>Загрузчик видео</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QListWidget" name="listWidget">
-    <property name="geometry">
-     <rect>
-      <x>15</x>
-      <y>11</y>
-      <width>491</width>
-      <height>181</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>360</y>
-      <width>490</width>
-      <height>38</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0">
-     <property name="spacing">
-      <number>6</number>
-     </property>
-     <item>
-      <widget class="QPushButton" name="genVideo">
-       <property name="text">
-        <string>Сгенерировать видео</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
@@ -55,16 +23,16 @@
       <height>131</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <layout class="QVBoxLayout" name="videoDelaySettings">
      <item>
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="videoDelayMinLabel">
        <property name="text">
         <string>Длина фрагмента мин.</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QDoubleSpinBox" name="videoDelayMin">
+      <widget class="QDoubleSpinBox" name="videoDelayMinSpinBox">
        <property name="singleStep">
         <double>0.100000000000000</double>
        </property>
@@ -74,14 +42,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="videoDelayMaxLabel">
        <property name="text">
         <string>Длина фрагмента макс.</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QDoubleSpinBox" name="videoDelayMax">
+      <widget class="QDoubleSpinBox" name="videoDelayMaxSpinBox">
        <property name="singleStep">
         <double>0.100000000000000</double>
        </property>
@@ -101,16 +69,16 @@
       <height>128</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_8">
+    <layout class="QVBoxLayout" name="fragmentsAndCount">
      <item>
-      <widget class="QLabel" name="label_5">
+      <widget class="QLabel" name="fragmentLabel">
        <property name="text">
         <string>Фрагментов</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="fragmentInVideo">
+      <widget class="QSpinBox" name="fragmentInSpinBox">
        <property name="minimum">
         <number>1</number>
        </property>
@@ -120,14 +88,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_10">
+      <widget class="QLabel" name="videoCountLabel">
        <property name="text">
         <string>Количество видео</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="videoCount">
+      <widget class="QSpinBox" name="videoCountSpinBox">
        <property name="minimum">
         <number>1</number>
        </property>
@@ -147,16 +115,16 @@
       <height>128</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="heightAndWidth">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="widthLabel">
        <property name="text">
         <string>Ширина</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="widthVideo">
+      <widget class="QSpinBox" name="widthSpinBox">
        <property name="maximum">
         <number>10000</number>
        </property>
@@ -169,14 +137,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="heightLabel">
        <property name="text">
         <string>Высота</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="heightVideo">
+      <widget class="QSpinBox" name="heightSpinBox">
        <property name="maximum">
         <number>10000</number>
        </property>
@@ -190,8 +158,67 @@
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>499</width>
+      <height>189</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="assets">
+     <item>
+      <widget class="QTextEdit" name="assetsSettings"/>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="assetsButtons">
+       <item>
+        <widget class="QPushButton" name="videoPathButton">
+         <property name="text">
+          <string>Видео</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="audioPathButton">
+         <property name="text">
+          <string>Аудио</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="textPathButton">
+         <property name="text">
+          <string>Текст</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="fontsPathButton">
+         <property name="text">
+          <string>Шрифт</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="videoGenerationButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>360</y>
+      <width>488</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Сгенерировать видео</string>
+    </property>
+   </widget>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
