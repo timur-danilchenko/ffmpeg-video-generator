@@ -4,4 +4,3 @@ __pycache__/
 venv
 .idea
 *.exe
-!**/__pycache__/
