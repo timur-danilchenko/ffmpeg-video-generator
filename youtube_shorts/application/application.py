@@ -32,41 +32,41 @@ class Application(QtWidgets.QMainWindow, Ui_MainWindow):
         max_delay = self.videoDelayMaxSpinBox.value()
         video_count = self.videoCountSpinBox.value()
 
-        self.video_generator.run(width, height, max_pieces_video_in_one_video, min_delay, max_delay, video_count)
-        # threading.Thread(target=self.video_generator.run,
-        #                  args=(width, height, max_pieces_video_in_one_video,
-        #                        min_delay, max_delay, video_count)).start()
+        # self.video_generator.run(width, height, max_pieces_video_in_one_video, min_delay, max_delay, video_count)
+        threading.Thread(target=self.video_generator.run,
+                          args=(width, height, max_pieces_video_in_one_video,
+                                min_delay, max_delay, video_count)).start()
 
     def update_info(self):
-        count_videos = len(list(settings.VIDEOS.glob("**/*.mp4")))
-        count_audios = len(list(settings.AUDIOS.glob("**/*.mp3")))
-        count_texts = len(list(settings.TEXTS.glob("**/*.txt")))
-        count_fonts = len(list(settings.FONTS.glob("**/*.ttf")))
+        videos = len(list(settings.VIDEOS.glob("*.mp4")))
+        audios = len(list(settings.AUDIOS.glob("*.mp3")))
+        texts = len(list(settings.TEXTS.glob("*.txt")))
+        fonts = len(list(settings.FONTS.glob("*.ttf")))
 
         self.assetsSettings.clear()
 
-        self.assetsSettings.setText(f"Количество исходных видео: {count_videos:03d}\n"
-            f"Количество аудио дорожек: {count_audios:03d}\n" 
-            f"Количество текстов: {count_texts:03d}\n" 
-            f"Количество шрифтов: {count_fonts:03d}\n")
+        self.assetsSettings.setText(f"Количество исходных видео: {videos:03d}\n"
+                                    f"Количество аудио дорожек: {audios:03d}\n" 
+                                    f"Количество текстов: {texts:03d}\n" 
+                                    f"Количество шрифтов: {fonts:03d}\n")
 
         # self.assetsSettings.addItem(f"Количество сгенерированных видео: {count_results:03d}")
         # self.assetsSettings.addItem(f"Количество добавленных аккаунтов: {accounts_count:03d}")
 
     def video_path(self):
-        settings.path_videos(QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку с исходными видео'))
+        settings.path_videos(QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку с исходными видео(*.mp4)'))
         self.update_info()
 
     def audio_path(self):
-        settings.path_audios(QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку с аудиозаписями'))
+        settings.path_audios(QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку с аудиозаписями(*.mp3)'))
         self.update_info()
 
     def text_path(self):
-        settings.path_texts(QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку с текстами'))
+        settings.path_texts(QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку с текстами(*.txt)'))
         self.update_info()
 
     def fonts_path(self):
-        settings.path_fonts(QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку с шрифтами'))
+        settings.path_fonts(QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку с шрифтами(*.ttf)'))
         self.update_info()
 
 def run(video_generator):

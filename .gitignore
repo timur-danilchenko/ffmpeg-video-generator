@@ -1,6 +1,7 @@
 sessions/
-__pycache__
+__pycache__/
+*.pyc
 venv
 .idea
-run.spec
 *.exe
+!**/__pycache__/
