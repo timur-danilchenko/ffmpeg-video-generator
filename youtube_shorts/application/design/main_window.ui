@@ -11,60 +11,14 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Загрузчик видео</string>
+   <string>Генератор видео</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="verticalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>140</y>
-      <width>161</width>
-      <height>101</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="videoDelaySettings">
-     <item>
-      <widget class="QLabel" name="videoDelayMinLabel">
-       <property name="text">
-        <string>Длина фрагмента мин.</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QDoubleSpinBox" name="videoDelayMinSpinBox">
-       <property name="singleStep">
-        <double>0.100000000000000</double>
-       </property>
-       <property name="value">
-        <double>3.000000000000000</double>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="videoDelayMaxLabel">
-       <property name="text">
-        <string>Длина фрагмента макс.</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QDoubleSpinBox" name="videoDelayMaxSpinBox">
-       <property name="singleStep">
-        <double>0.100000000000000</double>
-       </property>
-       <property name="value">
-        <double>10.000000000000000</double>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QWidget" name="verticalLayoutWidget_7">
     <property name="geometry">
      <rect>
-      <x>370</x>
-      <y>140</y>
+      <x>210</x>
+      <y>150</y>
       <width>141</width>
       <height>101</height>
      </rect>
@@ -109,8 +63,8 @@
    <widget class="QWidget" name="verticalLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>19</x>
-      <y>140</y>
+      <x>29</x>
+      <y>150</y>
       <width>171</width>
       <height>101</height>
      </rect>
@@ -164,7 +118,7 @@
       <x>20</x>
       <y>10</y>
       <width>491</width>
-      <height>121</height>
+      <height>137</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="assets">
@@ -209,7 +163,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>250</y>
+      <y>260</y>
       <width>488</width>
       <height>28</height>
      </rect>
@@ -217,6 +171,35 @@
     <property name="text">
      <string>Сгенерировать видео</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>160</y>
+      <width>160</width>
+      <height>82</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="TrashDurationLabel">
+       <property name="text">
+        <string>Длительность мусора</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="TrashDurationSpinBox"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="DeleteTrashButton">
+       <property name="text">
+        <string>Удалить мусор</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
  </widget>

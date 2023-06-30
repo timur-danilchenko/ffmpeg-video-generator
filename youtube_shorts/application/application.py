@@ -20,6 +20,7 @@ class Application(QtWidgets.QMainWindow, Ui_MainWindow):
         self.textPathButton.clicked.connect(self.text_path)
         self.fontsPathButton.clicked.connect(self.fonts_path)
         self.video_generator = video_generator
+        self.DeleteTrashButton.clicked.connect(self.delete_trash)
 
     def generate_videos(self):
         settings.path_results(QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку для полученных результатов'))
@@ -28,20 +29,19 @@ class Application(QtWidgets.QMainWindow, Ui_MainWindow):
         height = self.heightSpinBox.value()
 
         max_pieces_video_in_one_video = self.fragmentInSpinBox.value()
-        min_delay = self.videoDelayMinSpinBox.value()
-        max_delay = self.videoDelayMaxSpinBox.value()
+        # min_delay = self.videoDelayMinSpinBox.value()
+        # max_delay = self.videoDelayMaxSpinBox.value()
         video_count = self.videoCountSpinBox.value()
 
         # self.video_generator.run(width, height, max_pieces_video_in_one_video, min_delay, max_delay, video_count)
         threading.Thread(target=self.video_generator.run,
-                          args=(width, height, max_pieces_video_in_one_video,
-                                min_delay, max_delay, video_count)).start()
+                          args=(width, height, max_pieces_video_in_one_video, video_count)).start()
 
     def update_info(self):
-        videos = len(list(settings.VIDEOS.glob("*.mp4")))
-        audios = len(list(settings.AUDIOS.glob("*.mp3")))
-        texts = len(list(settings.TEXTS.glob("*.txt")))
-        fonts = len(list(settings.FONTS.glob("*.ttf")))
+        videos = len(list(settings.VIDEOS.glob("**/*.mp4")))
+        audios = len(list(settings.AUDIOS.glob("**/*.mp3")))
+        texts = len(list(settings.TEXTS.glob("**/*.txt")))
+        fonts = len(list(settings.FONTS.glob("**/*.ttf")))
 
         self.assetsSettings.clear()
 
@@ -68,6 +68,10 @@ class Application(QtWidgets.QMainWindow, Ui_MainWindow):
     def fonts_path(self):
         settings.path_fonts(QtWidgets.QFileDialog.getExistingDirectory(self, 'Выберите папку с шрифтами(*.ttf)'))
         self.update_info()
+
+    def delete_trash(self):
+        duration = self.TrashDurationSpinBox.value()
+        self.video_generator.delete_trash(duration)
 
 def run(video_generator):
     app = QtWidgets.QApplication(sys.argv)
