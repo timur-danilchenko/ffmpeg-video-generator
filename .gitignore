@@ -1,4 +1,6 @@
-assets/
 sessions/
-youtube_shorts/__pycache__
-youtube_shorts/pycs
+__pycache__/
+*.pyc
+venv
+.idea
+*.exe
